@@ -4,7 +4,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.3.1'
+        classpath 'com.android.tools.build:gradle:2.1.2'
         classpath 'org.ajoberstar:gradle-git:1.3.2'
         classpath 'com.github.dcendents:android-maven-plugin:1.2'
     }
@@ -12,11 +12,15 @@ buildscript {
 
 apply plugin: 'maven'
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion 24
     buildToolsVersion '24.0.1'
+
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
         minSdkVersion 9
@@ -62,6 +66,11 @@ android {
 
 
 dependencies {
+    compile project(':axmlrpc')
+    compile 'com.android.support:appcompat-v7:24.1.0'
+    compile 'com.android.support:design:24.1.0'
+    compile 'com.android.support:preference-v7:24.1.0'
+    compile 'com.android.support:leanback-v17:24.1.0'
     compile 'io.github.mkjung:vlc-android-sdk-ivi:0.0.1'
 }
 
@@ -75,37 +84,37 @@ allprojects {
     }
 }
 
-install {
-    repositories.mavenInstaller {
-        pom {
-            project {
-                packaging project.POM_PACKAGING
-                name project.POM_NAME
-                description project.POM_DESCRIPTION
-                url project.POM_URL
-
-                licenses {
-                    license {
-                        name project.POM_LICENCE_NAME
-                        url project.POM_LICENCE_URL
-                        distribution project.POM_LICENCE_DIST
-                    }
-                }
-                developers {
-                    developer {
-                        id project.POM_DEVELOPER_ID
-                        name project.POM_DEVELOPER_NAME
-                    }
-                }
-                scm {
-                    connection project.POM_SCM_CONNECTION
-                    developerConnection project.POM_SCM_DEV_CONNECTION
-                    url project.POM_SCM_URL
-                }
-            }
-        }
-    }
-}
+//install {
+//    repositories.mavenInstaller {
+//        pom {
+//            project {
+//                packaging project.POM_PACKAGING
+//                name project.POM_NAME
+//                description project.POM_DESCRIPTION
+//                url project.POM_URL
+//
+//                licenses {
+//                    license {
+//                        name project.POM_LICENCE_NAME
+//                        url project.POM_LICENCE_URL
+//                        distribution project.POM_LICENCE_DIST
+//                    }
+//                }
+//                developers {
+//                    developer {
+//                        id project.POM_DEVELOPER_ID
+//                        name project.POM_DEVELOPER_NAME
+//                    }
+//                }
+//                scm {
+//                    connection project.POM_SCM_CONNECTION
+//                    developerConnection project.POM_SCM_DEV_CONNECTION
+//                    url project.POM_SCM_URL
+//                }
+//            }
+//        }
+//    }
+//}
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
@@ -127,3 +136,5 @@ artifacts {
     archives sourcesJar
 }
 
+apply plugin: 'maven'
+apply plugin: 'maven'

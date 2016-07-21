@@ -1,0 +1,2 @@
+include ':axmlrpc'
+project(':axmlrpc').projectDir = new File('java-libs/axmlrpc')

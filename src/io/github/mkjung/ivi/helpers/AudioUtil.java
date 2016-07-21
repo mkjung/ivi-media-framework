@@ -40,6 +40,7 @@ import org.videolan.libvlc.util.AndroidUtil;
 
 // import io.github.mkjung.ivi.BuildConfig;
 // import io.github.mkjung.ivi.R;
+import io.github.mkjung.BuildConfig;
 import io.github.mkjung.ivi.VLCApplication;
 import io.github.mkjung.ivi.media.MediaUtils;
 import io.github.mkjung.ivi.media.MediaWrapper;
@@ -82,55 +83,55 @@ public class AudioUtil {
      */
     public static String PLAYLIST_DIR = null;
 
-    public static final BitmapDrawable DEFAULT_COVER = new BitmapDrawable(VLCApplication.getAppResources(), BitmapCache.getFromResource(VLCApplication.getAppResources(), R.drawable.icon));
+//    public static final BitmapDrawable DEFAULT_COVER = new BitmapDrawable(VLCApplication.getAppResources(), BitmapCache.getFromResource(VLCApplication.getAppResources(), R.drawable.icon));
 
-    @RequiresPermission(android.Manifest.permission.WRITE_SETTINGS)
-    public static void setRingtone(MediaWrapper song, Activity context){
-        if (!Permissions.canWriteSettings(context)) {
-            Permissions.checkWriteSettingsPermission(context, Permissions.PERMISSION_SYSTEM_RINGTONE);
-            return;
-        }
-        File newringtone = AndroidUtil.UriToFile(song.getUri());
-        if(newringtone == null || !newringtone.exists()) {
-            Toast.makeText(context.getApplicationContext(),context.getString(R.string.ringtone_error), Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.MediaColumns.DATA, newringtone.getAbsolutePath());
-        values.put(MediaStore.MediaColumns.TITLE, song.getTitle());
-        values.put(MediaStore.MediaColumns.MIME_TYPE, "audio/*");
-        values.put(MediaStore.Audio.Media.ARTIST, song.getArtist());
-        values.put(MediaStore.Audio.Media.IS_RINGTONE, true);
-        values.put(MediaStore.Audio.Media.IS_NOTIFICATION, false);
-        values.put(MediaStore.Audio.Media.IS_ALARM, false);
-        values.put(MediaStore.Audio.Media.IS_MUSIC, false);
-
-        Uri uri = MediaStore.Audio.Media.getContentUriForPath(newringtone.getAbsolutePath());
-        Uri newUri;
-        try {
-            context.getContentResolver().delete(uri, MediaStore.MediaColumns.DATA + "=\"" + newringtone.getAbsolutePath() + "\"", null);
-            newUri = context.getContentResolver().insert(uri, values);
-            RingtoneManager.setActualDefaultRingtoneUri(
-                    context.getApplicationContext(),
-                    RingtoneManager.TYPE_RINGTONE,
-                    newUri
-            );
-        } catch(Exception e) {
-            Log.e(TAG, "error setting ringtone", e);
-            Toast.makeText(context.getApplicationContext(),
-                    context.getString(R.string.ringtone_error),
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Toast.makeText(
-                context.getApplicationContext(),
-                context.getString(R.string.ringtone_set, song.getTitle()),
-                Toast.LENGTH_SHORT)
-                .show();
-
-    }
+//    @RequiresPermission(android.Manifest.permission.WRITE_SETTINGS)
+//    public static void setRingtone(MediaWrapper song, Activity context){
+//        if (!Permissions.canWriteSettings(context)) {
+//            Permissions.checkWriteSettingsPermission(context, Permissions.PERMISSION_SYSTEM_RINGTONE);
+//            return;
+//        }
+//        File newringtone = AndroidUtil.UriToFile(song.getUri());
+//        if(newringtone == null || !newringtone.exists()) {
+//            Toast.makeText(context.getApplicationContext(),context.getString(R.string.ringtone_error), Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        ContentValues values = new ContentValues();
+//        values.put(MediaStore.MediaColumns.DATA, newringtone.getAbsolutePath());
+//        values.put(MediaStore.MediaColumns.TITLE, song.getTitle());
+//        values.put(MediaStore.MediaColumns.MIME_TYPE, "audio/*");
+//        values.put(MediaStore.Audio.Media.ARTIST, song.getArtist());
+//        values.put(MediaStore.Audio.Media.IS_RINGTONE, true);
+//        values.put(MediaStore.Audio.Media.IS_NOTIFICATION, false);
+//        values.put(MediaStore.Audio.Media.IS_ALARM, false);
+//        values.put(MediaStore.Audio.Media.IS_MUSIC, false);
+//
+//        Uri uri = MediaStore.Audio.Media.getContentUriForPath(newringtone.getAbsolutePath());
+//        Uri newUri;
+//        try {
+//            context.getContentResolver().delete(uri, MediaStore.MediaColumns.DATA + "=\"" + newringtone.getAbsolutePath() + "\"", null);
+//            newUri = context.getContentResolver().insert(uri, values);
+//            RingtoneManager.setActualDefaultRingtoneUri(
+//                    context.getApplicationContext(),
+//                    RingtoneManager.TYPE_RINGTONE,
+//                    newUri
+//            );
+//        } catch(Exception e) {
+//            Log.e(TAG, "error setting ringtone", e);
+//            Toast.makeText(context.getApplicationContext(),
+//                    context.getString(R.string.ringtone_error),
+//                    Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        Toast.makeText(
+//                context.getApplicationContext(),
+//                context.getString(R.string.ringtone_set, song.getTitle()),
+//                Toast.LENGTH_SHORT)
+//                .show();
+//
+//    }
 
     @SuppressLint("NewApi")
     public static void prepareCacheFolder(Context context) {
@@ -209,9 +210,10 @@ public class AudioUtil {
             String mAlbum = MediaUtils.getMediaAlbum(context, media);
 
             /* Parse decoded attachment */
-            if( mArtist.length() == 0 || mAlbum.length() == 0 ||
-                    mArtist.equals(VLCApplication.getAppContext().getString(R.string.unknown_artist)) ||
-                    mAlbum.equals(VLCApplication.getAppContext().getString(R.string.unknown_album)) )
+            if( mArtist.length() == 0 || mAlbum.length() == 0
+//                    || mArtist.equals(VLCApplication.getAppContext().getString(R.string.unknown_artist))
+//                    || mAlbum.equals(VLCApplication.getAppContext().getString(R.string.unknown_album))
+                    )
             {
                 /* If artist or album are missing, it was cached by title MD5 hash */
                 MessageDigest md = MessageDigest.getInstance("MD5");

@@ -205,23 +205,23 @@ public class MediaLibrary {
         return playlistItems;
     }
 
-    public ArrayList<AudioBrowserListAdapter.ListItem> getPlaylistDbItems() {
-        ArrayList<AudioBrowserListAdapter.ListItem> playlistItems = new ArrayList<>();
-        AudioBrowserListAdapter.ListItem playList;
-        MediaDatabase db = MediaDatabase.getInstance();
-        String[] items, playlistNames = db.getPlaylists();
-        for (String playlistName : playlistNames){
-            items = db.playlistGetItems(playlistName);
-            if (items == null)
-                continue;
-            playList = new AudioBrowserListAdapter.ListItem(playlistName, null, null, false);
-            for (String track : items){
-                playList.mMediaList.add(new MediaWrapper(AndroidUtil.LocationToUri(track)));
-            }
-            playlistItems.add(playList);
-        }
-        return playlistItems;
-    }
+//    public ArrayList<AudioBrowserListAdapter.ListItem> getPlaylistDbItems() {
+//        ArrayList<AudioBrowserListAdapter.ListItem> playlistItems = new ArrayList<>();
+//        AudioBrowserListAdapter.ListItem playList;
+//        MediaDatabase db = MediaDatabase.getInstance();
+//        String[] items, playlistNames = db.getPlaylists();
+//        for (String playlistName : playlistNames){
+//            items = db.playlistGetItems(playlistName);
+//            if (items == null)
+//                continue;
+//            playList = new AudioBrowserListAdapter.ListItem(playlistName, null, null, false);
+//            for (String track : items){
+//                playList.mMediaList.add(new MediaWrapper(AndroidUtil.LocationToUri(track)));
+//            }
+//            playlistItems.add(playList);
+//        }
+//        return playlistItems;
+//    }
 
     public ArrayList<MediaWrapper> getMediaItems() {
         return mItemList;

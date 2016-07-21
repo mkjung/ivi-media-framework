@@ -67,6 +67,7 @@ import org.videolan.libvlc.MediaPlayer;
 import org.videolan.libvlc.util.AndroidUtil;
 
 // import io.github.mkjung.ivi.gui.AudioPlayerContainerActivity;
+import io.github.mkjung.BuildConfig;
 import io.github.mkjung.ivi.helpers.AudioUtil;
 // import io.github.mkjung.ivi.gui.preferences.PreferencesActivity;
 // import io.github.mkjung.ivi.gui.preferences.PreferencesFragment;
@@ -188,7 +189,7 @@ public class PlaybackService extends Service implements IVLCVout.Callback {
      */
     private long mWidgetPositionTimestamp = Calendar.getInstance().getTimeInMillis();
     private ComponentName mRemoteControlClientReceiverComponent;
-    private PopupManager mPopupManager;
+    //private PopupManager mPopupManager;
 
     private static LibVLC LibVLC() {
         return VLCInstance.get();
@@ -1786,25 +1787,25 @@ public class PlaybackService extends Service implements IVLCVout.Callback {
         showPopup();
     }
 
-    @MainThread
-    public void removePopup() {
-        if (mPopupManager != null) {
-            mPopupManager.removePopup();
-        }
-        mPopupManager = null;
-    }
+//    @MainThread
+//    public void removePopup() {
+//        if (mPopupManager != null) {
+//            mPopupManager.removePopup();
+//        }
+//        mPopupManager = null;
+//    }
 
-    @MainThread
-    public boolean isPlayingPopup() {
-        return mPopupManager != null;
-    }
+//    @MainThread
+//    public boolean isPlayingPopup() {
+//        return mPopupManager != null;
+//    }
 
-    @MainThread
-    public void showPopup() {
-        if (mPopupManager == null)
-            mPopupManager = new PopupManager(this);
-        mPopupManager.showPopup();
-    }
+//    @MainThread
+//    public void showPopup() {
+//        if (mPopupManager == null)
+//            mPopupManager = new PopupManager(this);
+//        mPopupManager.showPopup();
+//    }
 
     public void setVideoTrackEnabled(boolean enabled) {
         if (!hasMedia() || !isPlaying())

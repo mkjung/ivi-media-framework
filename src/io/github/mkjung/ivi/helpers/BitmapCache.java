@@ -42,8 +42,8 @@ public class BitmapCache {
     public final static String TAG = "VLC/BitmapCache";
     private final static boolean LOG_ENABLED = false;
 
-    private static final String CONE_KEY = "res:"+ R.drawable.cone;
-    private static final String CONE_O_KEY = "res:"+ R.drawable.ic_cone_o;
+    //private static final String CONE_KEY = "res:"+ R.drawable.cone;
+    //private static final String CONE_O_KEY = "res:"+ R.drawable.ic_cone_o;
     private static BitmapCache mInstance;
     private final LruCache<String, CacheableBitmap> mMemCache;
 
