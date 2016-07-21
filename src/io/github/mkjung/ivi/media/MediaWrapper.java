@@ -32,7 +32,8 @@ import org.videolan.libvlc.Media.Meta;
 import org.videolan.libvlc.Media.VideoTrack;
 import org.videolan.libvlc.MediaPlayer;
 import org.videolan.libvlc.util.Extensions;
-import io.github.mkjung.ivi.gui.helpers.BitmapUtil;
+
+import io.github.mkjung.ivi.helpers.BitmapUtil;
 
 import java.util.Locale;
 
