@@ -1,2 +1,0 @@
-include ':axmlrpc', ':ivi'
-project(':axmlrpc').projectDir = new File('java-libs/axmlrpc')
