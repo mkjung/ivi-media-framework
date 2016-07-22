@@ -19,7 +19,7 @@ android {
         enabled = true
     }
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 17
         targetSdkVersion 23
         versionCode project.VERSION_CODE.toInteger()
         versionName project.VERSION_NAME
