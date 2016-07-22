@@ -54,7 +54,7 @@ abstract public class VLCAppWidgetProvider extends AppWidgetProvider {
     public static final String ACTION_WIDGET_UPDATE_COVER = ACTION_WIDGET_PREFIX+"UPDATE_COVER";
     public static final String ACTION_WIDGET_UPDATE_POSITION = ACTION_WIDGET_PREFIX+"UPDATE_POSITION";
 
-    public static final String VLC_PACKAGE = BuildConfig.APPLICATION_ID;
+//    public static final String VLC_PACKAGE = BuildConfig.APPLICATION_ID;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -64,10 +64,10 @@ abstract public class VLCAppWidgetProvider extends AppWidgetProvider {
         Intent i = new Intent(ACTION_WIDGET_INIT);
         onReceive(context, i);
 
-        /* ask a refresh from the service if there is one */
-        i = new Intent(ACTION_WIDGET_INIT);
-        i.setPackage(VLC_PACKAGE);
-        context.sendBroadcast(i);
+//        /* ask a refresh from the service if there is one */
+//        i = new Intent(ACTION_WIDGET_INIT);
+//        i.setPackage(VLC_PACKAGE);
+//        context.sendBroadcast(i);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
