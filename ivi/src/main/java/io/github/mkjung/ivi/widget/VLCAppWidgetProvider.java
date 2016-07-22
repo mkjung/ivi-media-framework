@@ -88,48 +88,48 @@ abstract public class VLCAppWidgetProvider extends AppWidgetProvider {
             Intent iPlay = new Intent(ACTION_REMOTE_PLAYPAUSE);
             Intent iStop = new Intent(ACTION_REMOTE_STOP);
             Intent iForward = new Intent(ACTION_REMOTE_FORWARD);
-            Intent iVlc = new Intent(VLCApplication.getAppContext(), MainActivity.class);
+//            Intent iVlc = new Intent(VLCApplication.getAppContext(), MainActivity.class);
 
             PendingIntent piBackward = PendingIntent.getBroadcast(context, 0, iBackward, PendingIntent.FLAG_UPDATE_CURRENT);
             PendingIntent piPlay = PendingIntent.getBroadcast(context, 0, iPlay, PendingIntent.FLAG_UPDATE_CURRENT);
             PendingIntent piStop = PendingIntent.getBroadcast(context, 0, iStop, PendingIntent.FLAG_UPDATE_CURRENT);
             PendingIntent piForward = PendingIntent.getBroadcast(context, 0, iForward, PendingIntent.FLAG_UPDATE_CURRENT);
-            PendingIntent piVlc = PendingIntent.getActivity(context, 0, iVlc, PendingIntent.FLAG_UPDATE_CURRENT);
+//            PendingIntent piVlc = PendingIntent.getActivity(context, 0, iVlc, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            views.setOnClickPendingIntent(R.id.backward, piBackward);
-            views.setOnClickPendingIntent(R.id.play_pause, piPlay);
-            views.setOnClickPendingIntent(R.id.stop, piStop);
-            views.setOnClickPendingIntent(R.id.forward, piForward);
-            views.setOnClickPendingIntent(R.id.cover, piVlc);
+//            views.setOnClickPendingIntent(R.id.backward, piBackward);
+//            views.setOnClickPendingIntent(R.id.play_pause, piPlay);
+//            views.setOnClickPendingIntent(R.id.stop, piStop);
+//            views.setOnClickPendingIntent(R.id.forward, piForward);
+//            views.setOnClickPendingIntent(R.id.cover, piVlc);
             partial = false;
-            if (AndroidUtil.isJellyBeanMR1OrLater() && TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL) {
-                boolean black = this instanceof VLCAppWidgetProviderBlack;
-                views.setImageViewResource(R.id.forward, black ? R.drawable.ic_widget_previous_w : R.drawable.ic_widget_previous);
-                views.setImageViewResource(R.id.backward, black ? R.drawable.ic_widget_next_w : R.drawable.ic_widget_next);
-            }
+//            if (AndroidUtil.isJellyBeanMR1OrLater() && TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL) {
+//                boolean black = this instanceof VLCAppWidgetProviderBlack;
+//                views.setImageViewResource(R.id.forward, black ? R.drawable.ic_widget_previous_w : R.drawable.ic_widget_previous);
+//                views.setImageViewResource(R.id.backward, black ? R.drawable.ic_widget_next_w : R.drawable.ic_widget_next);
+//            }
         }
 
-        if (ACTION_WIDGET_UPDATE.equals(action)) {
-            String title = intent.getStringExtra("title");
-            String artist = intent.getStringExtra("artist");
-            boolean isplaying = intent.getBooleanExtra("isplaying", false);
-
-            views.setTextViewText(R.id.songName, title);
-            views.setTextViewText(R.id.artist, artist);
-            views.setImageViewResource(R.id.play_pause, getPlayPauseImage(isplaying));
-        }
-        else if (ACTION_WIDGET_UPDATE_COVER.equals(action)) {
-            Bitmap cover = intent.getParcelableExtra("cover");
-            if (cover != null)
-                views.setImageViewBitmap(R.id.cover, cover);
-            else
-                views.setImageViewResource(R.id.cover, R.drawable.icon);
-            views.setProgressBar(R.id.timeline, 100, 0, false);
-        }
-        else if (ACTION_WIDGET_UPDATE_POSITION.equals(action)) {
-            float pos = intent.getFloatExtra("position", 0f);
-            views.setProgressBar(R.id.timeline, 100, (int) (100 * pos), false);
-        }
+//        if (ACTION_WIDGET_UPDATE.equals(action)) {
+//            String title = intent.getStringExtra("title");
+//            String artist = intent.getStringExtra("artist");
+//            boolean isplaying = intent.getBooleanExtra("isplaying", false);
+//
+//            views.setTextViewText(R.id.songName, title);
+//            views.setTextViewText(R.id.artist, artist);
+//            views.setImageViewResource(R.id.play_pause, getPlayPauseImage(isplaying));
+//        }
+//        else if (ACTION_WIDGET_UPDATE_COVER.equals(action)) {
+//            Bitmap cover = intent.getParcelableExtra("cover");
+//            if (cover != null)
+//                views.setImageViewBitmap(R.id.cover, cover);
+//            else
+//                views.setImageViewResource(R.id.cover, R.drawable.icon);
+//            views.setProgressBar(R.id.timeline, 100, 0, false);
+//        }
+//        else if (ACTION_WIDGET_UPDATE_POSITION.equals(action)) {
+//            float pos = intent.getFloatExtra("position", 0f);
+//            views.setProgressBar(R.id.timeline, 100, (int) (100 * pos), false);
+//        }
 
         ComponentName widget = new ComponentName(context, this.getClass());
         AppWidgetManager manager = AppWidgetManager.getInstance(context);

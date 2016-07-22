@@ -30,7 +30,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.videolan.libvlc.util.VLCUtil;
-// import io.github.mkjung.ivi.R;
+import io.github.mkjung.ivi.R;
 import io.github.mkjung.ivi.VLCApplication;
 import io.github.mkjung.ivi.interfaces.IVideoBrowser;
 import io.github.mkjung.ivi.helpers.BitmapUtil;

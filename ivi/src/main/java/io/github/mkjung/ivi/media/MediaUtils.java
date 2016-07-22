@@ -13,7 +13,7 @@ import android.text.TextUtils;
 
 import org.videolan.libvlc.util.AndroidUtil;
 import io.github.mkjung.ivi.PlaybackService;
-// import io.github.mkjung.ivi.R;
+import io.github.mkjung.ivi.R;
 import io.github.mkjung.ivi.VLCApplication;
 // import io.github.mkjung.ivi.gui.video.VideoPlayerActivity;
 import io.github.mkjung.ivi.util.FileUtils;
@@ -98,18 +98,18 @@ public class MediaUtils {
     }
 
     public static void openMediaNoUi(final Context context, final MediaWrapper media){
-        if (media == null)
-            return;
-        if (media.getType() == MediaWrapper.TYPE_VIDEO)
-            VideoPlayerActivity.start(context, media.getUri(), media.getTitle());
-        else
-            new BaseCallBack(context) {
-                @Override
-                public void onConnected(PlaybackService service) {
-                    service.load(media);
-                    mClient.disconnect();
-                }
-            };
+//        if (media == null)
+//            return;
+//        if (media.getType() == MediaWrapper.TYPE_VIDEO)
+//            VideoPlayerActivity.start(context, media.getUri(), media.getTitle());
+//        else
+//            new BaseCallBack(context) {
+//                @Override
+//                public void onConnected(PlaybackService service) {
+//                    service.load(media);
+//                    mClient.disconnect();
+//                }
+//            };
     }
 
     public static void openList(final Context context, final List<MediaWrapper> list, final int position){
@@ -213,18 +213,21 @@ public class MediaUtils {
     private static String getMediaString(Context ctx, int id) {
         if (ctx != null)
             return ctx.getResources().getString(id);
-        else {
-            switch (id) {
-                case R.string.unknown_artist:
-                    return "Unknown Artist";
-                case R.string.unknown_album:
-                    return "Unknown Album";
-                case R.string.unknown_genre:
-                    return "Unknown Genre";
-                default:
-                    return "";
-            }
-        }
+        else
+            return "";
+
+//        else {
+//            switch (id) {
+//                case R.string.unknown_artist:
+//                    return "Unknown Artist";
+//                case R.string.unknown_album:
+//                    return "Unknown Album";
+//                case R.string.unknown_genre:
+//                    return "Unknown Genre";
+//                default:
+//                    return "";
+//            }
+//        }
     }
 
     private static abstract class BaseCallBack implements PlaybackService.Client.Callback {

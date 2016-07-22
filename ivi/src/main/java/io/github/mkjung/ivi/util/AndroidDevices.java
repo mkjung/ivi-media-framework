@@ -36,7 +36,7 @@ import android.view.InputDevice;
 import android.view.MotionEvent;
 
 import org.videolan.libvlc.util.AndroidUtil;
-// import io.github.mkjung.ivi.R;
+import io.github.mkjung.ivi.R;
 import io.github.mkjung.ivi.RemoteControlClientReceiver;
 import io.github.mkjung.ivi.VLCApplication;
 import io.github.mkjung.ivi.media.MediaWrapper;

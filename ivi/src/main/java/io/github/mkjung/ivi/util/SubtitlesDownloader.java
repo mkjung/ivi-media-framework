@@ -503,24 +503,24 @@ public class SubtitlesDownloader {
     private void showSnackBar(final String text) {
         if (mContext == null)
             return;
-        if (mContext instanceof AppCompatActivity && !(mContext instanceof VideoPlayerActivity)) {
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    View v = mContext.findViewById(R.id.fragment_placeholder);
-                    if (v == null)
-                        v = mContext.getWindow().getDecorView();
-                    UiTools.snacker(v, text);
-                }
-            });
-        } else {
+//        if (mContext instanceof AppCompatActivity && !(mContext instanceof VideoPlayerActivity)) {
+//            mHandler.post(new Runnable() {
+//                @Override
+//                public void run() {
+//                    View v = mContext.findViewById(R.id.fragment_placeholder);
+//                    if (v == null)
+//                        v = mContext.getWindow().getDecorView();
+//                    UiTools.snacker(v, text);
+//                }
+//            });
+//        } else {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
                     Toast.makeText(VLCApplication.getAppContext(), text, Toast.LENGTH_SHORT).show();
                 }
             });
-        }
+//        }
     }
 
     Handler mHandler = new Handler(Looper.getMainLooper()) {
@@ -528,11 +528,11 @@ public class SubtitlesDownloader {
         public void handleMessage(Message msg) {
             if (mContext == null || mContext.isFinishing())
                 return;
-            if (mContext instanceof VideoPlayerActivity) {
-                if (msg.what == DIALOG_SHOW)
-                    showSnackBar(R.string.downloading_subtitles);
-                return;
-            }
+//            if (mContext instanceof VideoPlayerActivity) {
+//                if (msg.what == DIALOG_SHOW)
+//                    showSnackBar(R.string.downloading_subtitles);
+//                return;
+//            }
             switch (msg.what) {
                 case DIALOG_SHOW:
                     mDialog = ProgressDialog.show(mContext, mContext.getString(R.string.subtitles_download_title), mContext.getString(R.string.connecting), true);

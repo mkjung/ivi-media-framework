@@ -43,7 +43,7 @@ import android.support.v7.preference.PreferenceManager;
 
 import org.videolan.libvlc.util.AndroidUtil;
 
-// import io.github.mkjung.ivi.R;
+import io.github.mkjung.ivi.R;
 import io.github.mkjung.ivi.VLCApplication;
 
 public class Permissions {
