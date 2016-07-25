@@ -17,36 +17,28 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
-package io.github.mkjung.ivi.helpers;
+package io.github.mkjung.ivi.gui.helpers;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresPermission;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.videolan.libvlc.util.AndroidUtil;
 
 // import io.github.mkjung.ivi.BuildConfig;
 // import io.github.mkjung.ivi.R;
 import io.github.mkjung.ivi.BuildConfig;
-import io.github.mkjung.ivi.VLCApplication;
 import io.github.mkjung.ivi.media.MediaUtils;
 import io.github.mkjung.ivi.media.MediaWrapper;
 import io.github.mkjung.ivi.util.AndroidDevices;
 import io.github.mkjung.ivi.util.MurmurHash;
-import io.github.mkjung.ivi.util.Permissions;
 import io.github.mkjung.ivi.util.Util;
 
 import java.io.BufferedOutputStream;

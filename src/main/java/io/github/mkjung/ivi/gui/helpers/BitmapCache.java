@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA 02110-1301, USA.
  *****************************************************************************/
 
-package io.github.mkjung.ivi.helpers;
+package io.github.mkjung.ivi.gui.helpers;
 
 import android.annotation.TargetApi;
 import android.app.ActivityManager;

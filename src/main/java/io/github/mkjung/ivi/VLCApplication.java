@@ -21,7 +21,6 @@ package io.github.mkjung.ivi;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -35,8 +34,8 @@ import org.videolan.libvlc.Dialog;
 
 // import io.github.mkjung.ivi.gui.DialogActivity;
 // import io.github.mkjung.ivi.gui.dialogs.VlcProgressDialog;
-import io.github.mkjung.ivi.helpers.AudioUtil;
-import io.github.mkjung.ivi.helpers.BitmapCache;
+import io.github.mkjung.ivi.gui.helpers.AudioUtil;
+import io.github.mkjung.ivi.gui.helpers.BitmapCache;
 import io.github.mkjung.ivi.media.MediaDatabase;
 import io.github.mkjung.ivi.util.AndroidDevices;
 import io.github.mkjung.ivi.util.Strings;

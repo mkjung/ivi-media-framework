@@ -48,7 +48,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
@@ -67,8 +66,7 @@ import org.videolan.libvlc.MediaPlayer;
 import org.videolan.libvlc.util.AndroidUtil;
 
 // import io.github.mkjung.ivi.gui.AudioPlayerContainerActivity;
-import io.github.mkjung.ivi.BuildConfig;
-import io.github.mkjung.ivi.helpers.AudioUtil;
+import io.github.mkjung.ivi.gui.helpers.AudioUtil;
 // import io.github.mkjung.ivi.gui.preferences.PreferencesActivity;
 // import io.github.mkjung.ivi.gui.preferences.PreferencesFragment;
 // import io.github.mkjung.ivi.gui.video.PopupManager;
@@ -84,7 +82,7 @@ import io.github.mkjung.ivi.util.Util;
 import io.github.mkjung.ivi.util.VLCInstance;
 import io.github.mkjung.ivi.util.VLCOptions;
 import io.github.mkjung.ivi.util.WeakHandler;
-import io.github.mkjung.ivi.widget.VLCAppWidgetProvider;
+//import io.github.mkjung.ivi.widget.VLCAppWidgetProvider;
 
 import java.io.File;
 import java.net.URI;
@@ -254,7 +252,7 @@ public class PlaybackService extends Service implements IVLCVout.Callback {
         filter.addAction(ACTION_REMOTE_LAST_PLAYLIST);
         filter.addAction(ACTION_REMOTE_LAST_VIDEO_PLAYLIST);
         filter.addAction(ACTION_REMOTE_SWITCH_VIDEO);
-        filter.addAction(VLCAppWidgetProvider.ACTION_WIDGET_INIT);
+//        filter.addAction(VLCAppWidgetProvider.ACTION_WIDGET_INIT);
         filter.addAction(Intent.ACTION_HEADSET_PLUG);
         filter.addAction(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
         filter.addAction(VLCApplication.SLEEP_INTENT);
@@ -295,7 +293,7 @@ public class PlaybackService extends Service implements IVLCVout.Callback {
             else
                 loadLastPlaylist(TYPE_AUDIO);
         }
-        updateWidget();
+//        updateWidget();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -498,9 +496,10 @@ public class PlaybackService extends Service implements IVLCVout.Callback {
                     getCurrentMediaWrapper().removeFlags(MediaWrapper.MEDIA_FORCE_AUDIO);
 //                    switchToVideo();
                 }
-            } else if (action.equalsIgnoreCase(VLCAppWidgetProvider.ACTION_WIDGET_INIT)) {
-                updateWidget();
             }
+//            else if (action.equalsIgnoreCase(VLCAppWidgetProvider.ACTION_WIDGET_INIT)) {
+//                updateWidget();
+//            }
 
             /*
              * headset plug events
@@ -668,7 +667,7 @@ public class PlaybackService extends Service implements IVLCVout.Callback {
                 case MediaPlayer.Event.TimeChanged:
                     break;
                 case MediaPlayer.Event.PositionChanged:
-                    updateWidgetPosition(event.getPositionChanged());
+//                    updateWidgetPosition(event.getPositionChanged());
                     break;
                 case MediaPlayer.Event.Vout:
                     break;
@@ -781,8 +780,8 @@ public class PlaybackService extends Service implements IVLCVout.Callback {
         for (Callback callback : mCallbacks) {
             callback.update();
         }
-        if (updateWidget)
-            updateWidget();
+//        if (updateWidget)
+//            updateWidget();
         updateMetadata();
     }
 
@@ -961,7 +960,7 @@ public class PlaybackService extends Service implements IVLCVout.Callback {
             mMediaPlayer.play();
             mHandler.sendEmptyMessage(SHOW_PROGRESS);
             updateMetadata();
-            updateWidget();
+//            updateWidget();
             broadcastMetadata();
         }
     }
@@ -1178,7 +1177,7 @@ public class PlaybackService extends Service implements IVLCVout.Callback {
     private void notifyTrackChanged() {
         mHandler.sendEmptyMessage(SHOW_PROGRESS);
         updateMetadata();
-        updateWidget();
+//        updateWidget();
         broadcastMetadata();
     }
 
@@ -1250,53 +1249,53 @@ public class PlaybackService extends Service implements IVLCVout.Callback {
         determinePrevAndNextIndices();
     }
 
-    private void updateWidget() {
-        updateWidgetState();
-        updateWidgetCover();
-    }
+//    private void updateWidget() {
+//        updateWidgetState();
+//        updateWidgetCover();
+//    }
 
-    private void updateWidgetState() {
-        Intent i = new Intent(VLCAppWidgetProvider.ACTION_WIDGET_UPDATE);
+//    private void updateWidgetState() {
+//        Intent i = new Intent(VLCAppWidgetProvider.ACTION_WIDGET_UPDATE);
+//
+//        if (hasCurrentMedia()) {
+//            final MediaWrapper media = getCurrentMedia();
+//            i.putExtra("title", media.getTitle());
+//            i.putExtra("artist", media.isArtistUnknown() && media.getNowPlaying() != null ?
+//                    media.getNowPlaying()
+//                    : MediaUtils.getMediaArtist(this, media));
+//        }
+//        else {
+//            i.putExtra("title", getString(R.string.widget_default_text));
+//            i.putExtra("artist", "");
+//        }
+//        i.putExtra("isplaying", mMediaPlayer.isPlaying());
+//
+//        sendBroadcast(i);
+//    }
 
-        if (hasCurrentMedia()) {
-            final MediaWrapper media = getCurrentMedia();
-            i.putExtra("title", media.getTitle());
-            i.putExtra("artist", media.isArtistUnknown() && media.getNowPlaying() != null ?
-                    media.getNowPlaying()
-                    : MediaUtils.getMediaArtist(this, media));
-        }
-        else {
-            i.putExtra("title", getString(R.string.widget_default_text));
-            i.putExtra("artist", "");
-        }
-        i.putExtra("isplaying", mMediaPlayer.isPlaying());
+//    private void updateWidgetCover() {
+//        Intent i = new Intent(VLCAppWidgetProvider.ACTION_WIDGET_UPDATE_COVER);
+//
+//        Bitmap cover = hasCurrentMedia() ? AudioUtil.getCover(this, getCurrentMedia(), 64) : null;
+//        i.putExtra("cover", cover);
+//
+//        sendBroadcast(i);
+//    }
 
-        sendBroadcast(i);
-    }
-
-    private void updateWidgetCover() {
-        Intent i = new Intent(VLCAppWidgetProvider.ACTION_WIDGET_UPDATE_COVER);
-
-        Bitmap cover = hasCurrentMedia() ? AudioUtil.getCover(this, getCurrentMedia(), 64) : null;
-        i.putExtra("cover", cover);
-
-        sendBroadcast(i);
-    }
-
-    private void updateWidgetPosition(float pos) {
-        // no more than one widget update for each 1/50 of the song
-        long timestamp = Calendar.getInstance().getTimeInMillis();
-        if (!hasCurrentMedia()
-                || timestamp - mWidgetPositionTimestamp < getCurrentMedia().getLength() / 50)
-            return;
-
-        updateWidgetState();
-
-        mWidgetPositionTimestamp = timestamp;
-        Intent i = new Intent(VLCAppWidgetProvider.ACTION_WIDGET_UPDATE_POSITION);
-        i.putExtra("position", pos);
-        sendBroadcast(i);
-    }
+//    private void updateWidgetPosition(float pos) {
+//        // no more than one widget update for each 1/50 of the song
+//        long timestamp = Calendar.getInstance().getTimeInMillis();
+//        if (!hasCurrentMedia()
+//                || timestamp - mWidgetPositionTimestamp < getCurrentMedia().getLength() / 50)
+//            return;
+//
+//        updateWidgetState();
+//
+//        mWidgetPositionTimestamp = timestamp;
+//        Intent i = new Intent(VLCAppWidgetProvider.ACTION_WIDGET_UPDATE_POSITION);
+//        i.putExtra("position", pos);
+//        sendBroadcast(i);
+//    }
 
     private void broadcastMetadata() {
         MediaWrapper media = getCurrentMedia();
