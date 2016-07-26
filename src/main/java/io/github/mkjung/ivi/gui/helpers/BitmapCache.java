@@ -32,7 +32,7 @@ import android.util.Log;
 
 import org.videolan.libvlc.util.AndroidUtil;
 
-// import io.github.mkjung.ivi.R;
+import io.github.mkjung.ivi.R;
 import io.github.mkjung.ivi.VLCApplication;
 
 import java.lang.ref.SoftReference;

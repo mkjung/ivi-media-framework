@@ -112,7 +112,7 @@ public class VLCInstance {
                 linkCompatLib(context);
             }
 
-//            sLibVLC = new LibVLC(context, VLCOptions.getLibOptions());
+            sLibVLC = new LibVLC(context, VLCOptions.getLibOptions());
 //            LibVLC.setOnNativeCrashListener(new LibVLC.OnNativeCrashListener() {
 //                @Override
 //                public void onNativeCrash() {
