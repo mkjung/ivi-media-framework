@@ -92,12 +92,12 @@ public class MediaUtils {
         });
     }
 
-    public static void openMediaNoUi(Uri uri){
-        final MediaWrapper media = new MediaWrapper(uri);
-        openMediaNoUi(VLCApplication.getAppContext(), media);
-    }
+//    public static void openMediaNoUi(Uri uri){
+//        final MediaWrapper media = new MediaWrapper(uri);
+//        openMediaNoUi(VLCApplication.getAppContext(), media);
+//    }
 
-    public static void openMediaNoUi(final Context context, final MediaWrapper media){
+//    public static void openMediaNoUi(final Context context, final MediaWrapper media){
 //        if (media == null)
 //            return;
 //        if (media.getType() == MediaWrapper.TYPE_VIDEO)
@@ -110,7 +110,7 @@ public class MediaUtils {
 //                    mClient.disconnect();
 //                }
 //            };
-    }
+//    }
 
     public static void openList(final Context context, final List<MediaWrapper> list, final int position){
         if (Util.isListEmpty(list))
