@@ -123,8 +123,8 @@ public class VLCApplication extends Application {
         Dialog.setCallbacks(VLCInstance.get(), mDialogCallbacks);
 
         // Disable remote control receiver on Fire TV.
-        if (!AndroidDevices.hasTsp())
-            AndroidDevices.setRemoteControlReceiverEnabled(false);
+//        if (!AndroidDevices.hasTsp())
+//            AndroidDevices.setRemoteControlReceiverEnabled(false);
     }
 
     /**

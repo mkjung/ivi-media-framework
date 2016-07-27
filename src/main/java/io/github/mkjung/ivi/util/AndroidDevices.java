@@ -37,7 +37,6 @@ import android.view.MotionEvent;
 
 import org.videolan.libvlc.util.AndroidUtil;
 import io.github.mkjung.ivi.R;
-import io.github.mkjung.ivi.RemoteControlClientReceiver;
 import io.github.mkjung.ivi.VLCApplication;
 import io.github.mkjung.ivi.media.MediaWrapper;
 
@@ -253,14 +252,6 @@ public class AndroidDevices {
             }
         }
         return networkEnabled;
-    }
-
-    public static void setRemoteControlReceiverEnabled(boolean enabled) {
-        VLCApplication.getAppContext().getPackageManager().setComponentEnabledSetting(
-                new ComponentName(VLCApplication.getAppContext(), RemoteControlClientReceiver.class),
-                enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED :
-                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP);
     }
 
     private static boolean isManufacturerBannedForMediastyleNotifications() {

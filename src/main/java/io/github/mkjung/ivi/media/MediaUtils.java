@@ -12,7 +12,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 
 import org.videolan.libvlc.util.AndroidUtil;
-import io.github.mkjung.ivi.PlaybackService;
+//import io.github.mkjung.ivi.PlaybackService;
 import io.github.mkjung.ivi.R;
 import io.github.mkjung.ivi.VLCApplication;
 // import io.github.mkjung.ivi.gui.video.VideoPlayerActivity;
@@ -68,81 +68,6 @@ public class MediaUtils {
         Intent intent = new Intent();
         intent.setAction(ACTION_SCAN_STOP);
         LocalBroadcastManager.getInstance(VLCApplication.getAppContext()).sendBroadcast(intent);
-    }
-
-    public static void appendMedia(final Context context, final MediaWrapper media){
-        if (media == null)
-            return;
-        new DialogCallback(context, new DialogCallback.Runnable() {
-                @Override
-                public void run(PlaybackService service) {
-                    service.append(media);
-                }
-        });
-    }
-
-    public static void openMedia(final Context context, final MediaWrapper media){
-        if (media == null)
-            return;
-        new DialogCallback(context, new DialogCallback.Runnable() {
-                @Override
-                public void run(PlaybackService service) {
-                    service.load(media);
-                }
-        });
-    }
-
-//    public static void openMediaNoUi(Uri uri){
-//        final MediaWrapper media = new MediaWrapper(uri);
-//        openMediaNoUi(VLCApplication.getAppContext(), media);
-//    }
-
-//    public static void openMediaNoUi(final Context context, final MediaWrapper media){
-//        if (media == null)
-//            return;
-//        if (media.getType() == MediaWrapper.TYPE_VIDEO)
-//            VideoPlayerActivity.start(context, media.getUri(), media.getTitle());
-//        else
-//            new BaseCallBack(context) {
-//                @Override
-//                public void onConnected(PlaybackService service) {
-//                    service.load(media);
-//                    mClient.disconnect();
-//                }
-//            };
-//    }
-
-    public static void openList(final Context context, final List<MediaWrapper> list, final int position){
-        if (Util.isListEmpty(list))
-            return;
-        new DialogCallback(context, new DialogCallback.Runnable() {
-            @Override
-            public void run(PlaybackService service) {
-                service.load(list, position);
-            }
-        });
-    }
-
-    public static void openUri(final Context context, final Uri uri){
-        if (uri == null)
-            return;
-        new DialogCallback(context, new DialogCallback.Runnable() {
-            @Override
-            public void run(PlaybackService service) {
-                service.loadUri(uri);
-            }
-        });
-    }
-
-    public static void openStream(final Context context, final String uri){
-        if (uri == null)
-            return;
-        new DialogCallback(context, new DialogCallback.Runnable() {
-            @Override
-            public void run(PlaybackService service) {
-                service.loadLocation(uri);
-            }
-        });
     }
 
     public static String getMediaArtist(Context ctx, MediaWrapper media) {
@@ -228,62 +153,5 @@ public class MediaUtils {
 //                    return "";
 //            }
 //        }
-    }
-
-    private static abstract class BaseCallBack implements PlaybackService.Client.Callback {
-        protected PlaybackService.Client mClient;
-
-        private BaseCallBack(Context context) {
-            mClient = new PlaybackService.Client(context, this);
-            mClient.connect();
-        }
-
-        protected BaseCallBack() {}
-
-        @Override
-        public void onDisconnected() {}
-    }
-
-    private static class DialogCallback extends BaseCallBack {
-        private final ProgressDialog dialog;
-        private final Runnable mRunnable;
-
-        private interface Runnable {
-            void run(PlaybackService service);
-        }
-
-        private DialogCallback(Context context, Runnable runnable) {
-            mClient = new PlaybackService.Client(context, this);
-            mRunnable = runnable;
-            this.dialog = ProgressDialog.show(
-                    context,
-                    context.getApplicationContext().getString(R.string.loading) + "…",
-                    context.getApplicationContext().getString(R.string.please_wait), true);
-            dialog.setCancelable(true);
-            dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    synchronized (this) {
-                        mClient.disconnect();
-                    }
-                }
-            });
-            synchronized (this) {
-                mClient.connect();
-            }
-        }
-
-        @Override
-        public void onConnected(PlaybackService service) {
-            synchronized (this) {
-                mRunnable.run(service);
-            }
-            dialog.cancel();
-        }
-
-        @Override
-        public void onDisconnected() {
-            dialog.dismiss();
-        }
     }
 }
